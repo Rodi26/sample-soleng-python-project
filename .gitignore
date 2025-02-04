@@ -11,3 +11,4 @@ terraform/.terraform/providers/registry.terraform.io/jfrog/platform/2.2.1/darwin
 terraform/.terraform/providers/registry.terraform.io/jfrog/platform/2.2.1/darwin_arm64/README.md
 terraform/.terraform/providers/registry.terraform.io/jfrog/platform/2.2.1/darwin_arm64/terraform-provider-platform_v2.2.1
 terraform/terraform.tfvars
+terraform/.terraform.tfstate.lock.info
