@@ -1,4 +1,4 @@
-name: Sample Python GitHub
+name: Sample_Python_GitHub
 on: workflow_dispatch
 
 permissions:
@@ -11,7 +11,7 @@ jobs:
     build-publish-python:
         runs-on: ubuntu-latest
         env:
-          DOCKER_REPO: 'docker-prod-local'
+          DOCKER_REPO: 'soleng-oci-dev-virtual'
           IMAGE_NAME: 'python-test-image-gh'
         outputs:
           image: ${{ vars.JF_URL }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}
@@ -36,7 +36,7 @@ jobs:
            
             - name: configure jfrog environment
               run: |
-                jf pip-config --repo-resolve=python-virtual    
+                jf pip-config --repo-resolve=${{ vars.repo-deploy-releases }}
                 
             - name: configure environment
               run: |                      
@@ -47,13 +47,13 @@ jobs:
                 
             - name: build project
               run: |                      
-                jf pip install -r requirements.txt  --module=jfrog-python-example
+                jf pip install -r requirements.txt  --module=jfrog-python-example --project "${{ vars.JFROG_PROJECT }}"
                 python setup.py sdist bdist_wheel
                 cd dist && echo "hashes=$(sha256sum * | base64 -w0)" >> $GITHUB_OUTPUT
 
             - name: publish python package
               run: |
-                jf rt u dist/ python-virtual/example-projects/ --module=jfrog-python-example
+                jf rt u dist/ python-virtual/example-projects/ --module=jfrog-python-example --project "${{ vars.JFROG_PROJECT }}"
 
             - name: Set up Docker Buildx
               uses: docker/setup-buildx-action@v3    
@@ -77,22 +77,22 @@ jobs:
                         
             - name: docker scan
               run: |  
-                 jf docker pull ${{ vars.JF_URL }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}
-                 jf docker scan ${{ vars.JF_URL }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}                               
+                 jf docker pull ${{ vars.JF_URL }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }} --project "${{ vars.JFROG_PROJECT }}"
+                 jf docker scan ${{ vars.JF_URL }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }} --project "${{ vars.JFROG_PROJECT }}"                               
 
             - name: add docker package to build
               run: |  
                  echo "${{ vars.JF_URL }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}@${{ steps.build.outputs.digest }}" > metadata.json
-                 jf rt build-docker-create ${{ env.DOCKER_REPO }} --image-file metadata.json 
+                 jf rt build-docker-create ${{ env.DOCKER_REPO }} --image-file metadata.json --project "${{ vars.JFROG_PROJECT }}"
                  
             - name: publish build info
               run: |
-                jf rt bce 
-                jf rt bp
+                jf rt bce --project "${{ vars.JFROG_PROJECT }}"
+                jf rt bp --project "${{ vars.JFROG_PROJECT }}"
                 
             - name: build scan
               run: |            
-                jf build-scan --fail=false
+                jf build-scan --fail=false --project "${{ vars.JFROG_PROJECT }}"
             
     provenance:
       needs: [build-publish-python]

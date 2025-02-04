@@ -1,1 +1,13 @@
 .DS_Store
+terraform/.terraform.lock.hcl
+terraform/terraform.tfstate
+terraform/terraform.tfstate.backup
+terraform/.terraform/providers/registry.terraform.io/integrations/github/6.5.0/darwin_arm64/CHANGELOG.md
+terraform/.terraform/providers/registry.terraform.io/integrations/github/6.5.0/darwin_arm64/LICENSE
+terraform/.terraform/providers/registry.terraform.io/integrations/github/6.5.0/darwin_arm64/README.md
+terraform/.terraform/providers/registry.terraform.io/integrations/github/6.5.0/darwin_arm64/terraform-provider-github_v6.5.0
+terraform/.terraform/providers/registry.terraform.io/jfrog/platform/2.2.1/darwin_arm64/CHANGELOG.md
+terraform/.terraform/providers/registry.terraform.io/jfrog/platform/2.2.1/darwin_arm64/LICENSE
+terraform/.terraform/providers/registry.terraform.io/jfrog/platform/2.2.1/darwin_arm64/README.md
+terraform/.terraform/providers/registry.terraform.io/jfrog/platform/2.2.1/darwin_arm64/terraform-provider-platform_v2.2.1
+terraform/terraform.tfvars
