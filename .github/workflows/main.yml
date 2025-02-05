@@ -41,7 +41,7 @@ jobs:
                 
             - name: configure environment
               run: |                      
-                python3 -m pip install --upgrade pip setuptools wheel sigstore
+                python3 -m pip install --upgrade pip setuptools wheel sigstore nltk
                 wheel -h
                 pip show setuptools
                 echo $VIRTUAL_ENV
