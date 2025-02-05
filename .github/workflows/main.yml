@@ -40,8 +40,9 @@ jobs:
                 jf pip-config --repo-resolve=${{ vars.MVN_DEV_REPO_DEPLOY_RELEASES }}
                 
             - name: configure environment
-              run: |                      
-                python3 -m pip install --upgrade pip setuptools wheel sigstore nltk
+              run: |   
+                python3 -m pip install --user nltk==3.9.1                   
+                python3 -m pip install --upgrade pip setuptools wheel sigstore
                 wheel -h
                 pip show setuptools
                 echo $VIRTUAL_ENV
