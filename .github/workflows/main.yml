@@ -28,6 +28,7 @@ jobs:
                 JF_GIT_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               with:
                   oidc-provider-name: "rodolphef-github-python2"
+                  oidc-audience: rodolphef-audience-python2
                   version: latest
                   
             - name: Checkout the repository    
