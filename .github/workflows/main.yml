@@ -68,8 +68,8 @@ jobs:
               uses: docker/login-action@v3
               with:
                 registry: rodolphefplus.jfrog.io/soleng-oci-dev-virtual/
-                username: ${{ vars.JF_USER }}
-                password: ${{ secrets.JF_ACCESS_TOKEN }}
+                username: "rodolphef@jfrog.com"
+                password: "ACY@pgu5tqx6ypd_tcz"
     
                 
             - name: Build Docker image    
