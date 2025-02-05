@@ -24,7 +24,7 @@ resource "github_actions_variable" "var4" {
 
 resource "github_actions_variable" "var5" {
   repository       = "${var.repository}"
-  variable_name    = "JFROG_PROJECT"
+  variable_name    = "JF_PROJECT"
   value            = "${var.project}"
 }
 
