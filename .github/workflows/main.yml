@@ -65,7 +65,7 @@ jobs:
               with:
                 registry: rodolphefplus.jfrog.io/soleng-oci-dev-virtual/
                 username: "${{ vars.JF_USER }}"
-                password: ${{ secrets.JF_ACCESS_TOKEN }}
+                password: "${{ secrets.JF_ACCESS_TOKEN }}"
     
                 
             - name: Build Docker image    
@@ -94,7 +94,7 @@ jobs:
                 
             - name: build scan
               run: |            
-                jf build-scan  --project "${{ vars.JF_PROJECT }}"
+                jf rt bs --project "${{ vars.JF_PROJECT }}"
             
     provenance:
       needs: [build-publish-python]
